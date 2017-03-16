@@ -1,5 +1,6 @@
-/* Nome: Felipe Escórcio de Sousa	RA: 171043
- * Nome:                          RA: 
+/* Nome: Felipe Escórcio de Sousa	        RA: 171043
+ * Nome: Érico Iago maldonado Faustino      RA: 170609
+ * Turma: B
  * Programa: Jogo de paciência
  * Descrição: O programa implementa uma partida de paciência, com as regras clássicas:
 	- Usa-se um baralho com 52 cartas
@@ -23,19 +24,23 @@
 #include <stdlib.h>
 
 typedef struct baralho{
-	char valor[3];	//guarda valor, naipe e um índice(0 marca uma carta não virada, 1 uma já virada(aberta)).
+	int valor;
+	char naipe;	
+	int face;
 	struct carta *acima;
 }carta;
 
 void dist_inicial(carta **P1);
+carta *criaEstoque();
+void guarda(carta **P1);
 
 int main(void){
 
-	carta *S1 = NULL, *S2 = NULL, *S3 = NULL, *S4 = NULL, /*O-Ouros , C-Copas, P-Paus, E-Espadas */
+	carta *S1 = NULL, *S2 = NULL, *S3 = NULL, *S4 = NULL, /*Saidas: 1=O-Ouros , 2=C-Copas, 3=P-Paus, 4=E-Espadas */
 		*J1 = NULL, *J2 = NULL, *J3 = NULL, *J4 = NULL, *J5 = NULL, *J6 = NULL, *J7 = NULL,
 		*D = NULL, *E = NULL;
 
-
+	dist_inicial(&P1);
 
 	return 0;
 }
@@ -45,24 +50,42 @@ int main(void){
  */
 void dist_inicial(carta **P1){
 
-	char **iniciais;
-	int i = 0;
+	char iniciais[28][3];	//guarda até 3 characteres que representarão a carta
+	int i = 0, t[28], valor[28]; //t guarda o numero de caracteres que corresponde à carta pra converte-la depois. 
 
-	**iniciais = (char*) malloc(sizeof(char) * 28);
 	for(i = 0; i < 28; i++){
-		*iniciais[i] = (char) malloc(sizeof(char) * 2);
-		/* iniciais[i] = getchar(stdin);
-		iniciais[i][3] = 0 */
+		t[i] = scanf("%c", iniciais[i]);
 	}
-
+	P1 =(carta **) malloc(sizeof(carta));
+	if(t[0] == 0){
+		if(iniciais[0][0] == 'A'){
+			valor[0] = 1;
+		}
+		else if(iniciais[0][0] == 'J'){
+			valor[0] = 11;
+		}
+		else if(iniciais[0][0] == 'Q'){
+			valor[0] = 12;
+		}
+		else{	//K
+			valor[0] = 13;
+		}
+	}
+	else if(t[0] == 2){
+		valor[0] = 10;
+	}
+	else{
+		valor[0] = iniciais[0][1] - '0';
+	}
 
 }
 /* Cria lista da pilha de estoque. */
 carta *criaEstoque(){
+	/*carta *estoque;
 
-	return estoque;
+	return estoque;*/
 }
-/* Pega todas as cartas e guarda na caixa. */
+/* Pega todas as cartas e guarda na caixinha. */
 void guarda(carta **P1){
 
 }
